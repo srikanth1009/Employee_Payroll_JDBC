@@ -6,6 +6,7 @@ public class EmployeePayrollService {
     private List<EmployeePayrollData> employeePayrollList;
 
     public enum IOService {
+    	
         DB_IO
     }
 

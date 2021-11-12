@@ -37,6 +37,7 @@ public class EmployeePayrollServiceTest {
     }
     /**
      * Purpose : To test whether the salary is updated in the database and is synced with the DB using JDBC PreparedStatement
+     *
      */
     @Test
     public void givenNewSalaryForEmployee_WhenUpdated_ShouldSyncWithDBUsingPreparedStatement() throws EmployeePayrollException {
