@@ -1,5 +1,6 @@
 package com.bridzelabz.jdbc;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class EmployeePayrollData {
     public int id;
@@ -12,5 +13,14 @@ public class EmployeePayrollData {
         this.name = name;
         this.salary = salary;
         this.start = start;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeePayrollData that = (EmployeePayrollData) o;
+        return id == that.id &&
+                Double.compare(that.salary, salary) == 0 &&
+                Objects.equals(name, that.name);
     }
 }
