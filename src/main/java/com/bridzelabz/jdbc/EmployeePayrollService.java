@@ -1,5 +1,6 @@
 package com.bridzelabz.jdbc;
 import java.util.List;
+import java.time.LocalDate;
 
 public class EmployeePayrollService {
     private final EmployeePayrollDBService employeePayrollDBService;
@@ -17,12 +18,11 @@ public class EmployeePayrollService {
     /**
      * Purpose : To get the list of employee payroll from the database
      */
-    public List<EmployeePayrollData> readEmployeePayrollData(IOService ioService) {
+    public List<EmployeePayrollData> readEmployeePayrollData(IOService ioService) throws EmployeePayrollException {
         if(ioService.equals(IOService.DB_IO))
             this.employeePayrollList = employeePayrollDBService.readData();
         return this.employeePayrollList;
     }
-
     /**
      * Purpose : To update the Employee Salary in the database
      *           If the value is updated, the result value is greater than 0; else 0
@@ -75,5 +75,13 @@ public class EmployeePayrollService {
                 .filter(employeePayrollDataItem -> employeePayrollDataItem.name.equals(name))
                 .findFirst()
                 .orElse(null);
+    }
+    /**
+     * Purpose : Retrieve the data for a particular date range
+     */
+    public List<EmployeePayrollData> readEmployeePayrollForDateRange(IOService ioService, LocalDate startDate, LocalDate endDate) throws EmployeePayrollException {
+        if( ioService.equals(IOService.DB_IO))
+            return employeePayrollDBService.getEmployeeForDateRange(startDate, endDate);
+        return null;
     }
 }
