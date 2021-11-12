@@ -151,13 +151,6 @@ public class EmployeePayrollDBService {
         }
         return employeePayrollList;
     }
-    /**
-     * Purpose : Read the data for a certain date range from the database
-     */
-    public List<EmployeePayrollData> getEmployeeForDateRange(LocalDate startDate, LocalDate endDate) throws EmployeePayrollException {
-        String sql = String.format("SELECT * FROM employee_payroll WHERE START BETWEEN '%s' AND '%s';",
-                Date.valueOf(startDate), Date.valueOf(endDate));
-        return getEmployeePayrollDataUsingDB(sql);
-    }
+    
 }
 

@@ -1,6 +1,6 @@
 package com.bridzelabz.jdbc;
 import java.util.List;
-import java.time.LocalDate;
+
 
 public class EmployeePayrollService {
     private final EmployeePayrollDBService employeePayrollDBService;
@@ -76,12 +76,5 @@ public class EmployeePayrollService {
                 .findFirst()
                 .orElse(null);
     }
-    /**
-     * Purpose : Retrieve the data for a particular date range
-     */
-    public List<EmployeePayrollData> readEmployeePayrollForDateRange(IOService ioService, LocalDate startDate, LocalDate endDate) throws EmployeePayrollException {
-        if( ioService.equals(IOService.DB_IO))
-            return employeePayrollDBService.getEmployeeForDateRange(startDate, endDate);
-        return null;
-    }
+    
 }
