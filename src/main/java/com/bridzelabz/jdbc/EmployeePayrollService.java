@@ -2,14 +2,15 @@ package com.bridzelabz.jdbc;
 import java.util.List;
 
 public class EmployeePayrollService {
-	private final EmployeePayrollDBService employeePayrollDBService;
+    private final EmployeePayrollDBService employeePayrollDBService;
     private List<EmployeePayrollData> employeePayrollList;
 
     public enum IOService {
         DB_IO
     }
+
     public EmployeePayrollService() {
-    	employeePayrollDBService = EmployeePayrollDBService.getInstance();
+        employeePayrollDBService = EmployeePayrollDBService.getInstance();
     }
 
     /**
@@ -20,6 +21,7 @@ public class EmployeePayrollService {
             this.employeePayrollList = employeePayrollDBService.readData();
         return this.employeePayrollList;
     }
+
     /**
      * Purpose : To update the Employee Salary in the database
      *           If the value is updated, the result value is greater than 0; else 0
@@ -29,6 +31,22 @@ public class EmployeePayrollService {
 
     public void updateEmployeeSalary(String name, double salary) throws EmployeePayrollException {
         int result = employeePayrollDBService.updateEmployeeData(name, salary);
+        if(result == 0)
+            return;
+        EmployeePayrollData employeePayrollData = this.getEmployeePayrollData(name);
+        if( employeePayrollData != null )
+            employeePayrollData.salary = salary;
+    }
+
+    /**
+     * Purpose : To update the Employee Salary in the database using Prepared statement
+     *           If the value is updated, the result value is greater than 0; else 0
+     *           Match the given name with the EmployeePayrollData list
+     *           If found, assign the given salary to the EmployeePayrollData list
+     */
+
+    public void updateEmployeeSalaryUsingPreparedStatement(String name, double salary) throws EmployeePayrollException {
+        int result = employeePayrollDBService.updateEmployeeDataPreparedStatement(name, salary);
         if(result == 0)
             return;
         EmployeePayrollData employeePayrollData = this.getEmployeePayrollData(name);
